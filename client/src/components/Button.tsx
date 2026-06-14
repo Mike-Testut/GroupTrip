@@ -1,4 +1,4 @@
-import {ButtonHTMLAttributes, forwardRef,} from "react";
+import {type ButtonHTMLAttributes, forwardRef,} from "react";
 
 
 type Variant = "primary" | "ghost" | "danger" | "subtle";
@@ -32,6 +32,7 @@ const sizes: Record<Size, string> = {
     sm: 'text-sm px-3 py-1.5 h-8',
     md: 'text-sm px-4 py-2 h-9',
     lg: 'text-base px-6 py-2.5 h-11',
+    xl: 'text-base px-8 py-3 h-13',
 }
 
 const Spinner = ()=> (
