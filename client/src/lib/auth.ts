@@ -48,7 +48,23 @@ const AuthProvider = ({children}: {children: ReactNode}) => {
         setAccessToken(data.accessToken)
         setUser(data.user)
     }
-    const signup = async (email: string, password: string, name: string) => {}
+
+    const signup = async (email: string, password: string, name: string) => {
+        const res = await fetch(`${API_URL}/auth/signup`, {
+            method: "POST",
+            body: JSON.stringify({email, password, name}),
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'},
+        })
+        if (!res.ok) {
+            const data = await res.json().catch(()=>({}))
+            throw new Error(data.message ?? 'signup failed')
+        }
+        const data = await res.json()
+        setAccessToken(data.accessToken)
+        setUser(data.user)
+    }
+
     const logout = async () => {}
 
     return (
