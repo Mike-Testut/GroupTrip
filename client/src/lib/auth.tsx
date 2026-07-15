@@ -1,4 +1,4 @@
-import {createContext, type ReactNode, useContext, useState} from "react";
+import {createContext, type ReactNode, useContext, useEffect, useState} from "react";
 
 let accessToken: string | null = null;
 const API_URL = import.meta.env.VITE_API_URL
@@ -7,7 +7,7 @@ const setAccessToken = (token: string | null ) => {
     accessToken = token;
 }
 
-const getAccessToken = () => {
+export const getAccessToken = () => {
     return accessToken;
 }
 
@@ -28,7 +28,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null)
 
-const AuthProvider = ({children}: {children: ReactNode}) => {
+export const AuthProvider = ({children}: {children: ReactNode}) => {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -78,12 +78,35 @@ const AuthProvider = ({children}: {children: ReactNode}) => {
 
     }
 
+    useEffect(()=>{
+        const restoreSession = async () => {
+            try{
+                const res = await fetch(`${API_URL}/auth/refresh`, {
+                    method: "POST",
+                    credentials: 'include',
+                })
+                if (res.ok) {
+                    const data = await res.json()
+                    setAccessToken(data.accessToken)
+                    setUser(data.user)
+                }
+            } catch {
+                // Network error or no valid session — either way, treat as logged out.
+            } finally {
+                setIsLoading(false)
+            }
+        }
+        restoreSession()
+    },[])
+
     return (
         <AuthContext.Provider value={{ user, isLoading, login, signup, logout }}>
     {children}
     </AuthContext.Provider>
     )
 }
+
+
 
 export const useAuth = () => {
     const context = useContext(AuthContext);
