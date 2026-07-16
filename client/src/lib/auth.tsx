@@ -1,17 +1,10 @@
 import {createContext, type ReactNode, useContext, useEffect, useState} from "react";
+import { setAccessToken} from "./token";
 
-let accessToken: string | null = null;
 const API_URL = import.meta.env.VITE_API_URL
 
-const setAccessToken = (token: string | null ) => {
-    accessToken = token;
-}
 
-export const getAccessToken = () => {
-    return accessToken;
-}
-
-interface User {
+export interface User {
     id: string;
     email: string;
     name: string;
