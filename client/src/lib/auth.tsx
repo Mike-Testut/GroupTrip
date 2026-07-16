@@ -1,15 +1,11 @@
 import {createContext, type ReactNode, useContext, useEffect, useState} from "react";
 import { setAccessToken} from "./token";
+import type {User} from "../types";
 
 const API_URL = import.meta.env.VITE_API_URL
 
 
-export interface User {
-    id: string;
-    email: string;
-    name: string;
-    avatarUrl?: string;
-}
+
 
 interface AuthContextType {
     user: User | null;
