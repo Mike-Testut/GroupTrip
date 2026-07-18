@@ -1,3 +1,6 @@
+export type ItineraryCategory = 'food' | 'sightseeing' | 'nightlife' | 'transport' | 'other';
+export type TimeSlot = 'morning' | 'afternoon' | 'evening';
+
 export interface User {
     id: string;
     email: string;
@@ -40,7 +43,7 @@ export interface Destination {
     aiSummary: string | null;
     weatherData: WeatherData | null;
     flightEstimate: number | null;
-    voteCount: number | null;
+    voteCount: number;
     hasVoted: boolean;
 
 }
@@ -60,6 +63,31 @@ export interface WeatherData {
     tempC: number;
     condition: string;
     icon?: string;
-
-
 }
+
+export interface ItineraryItem {
+    id: string;
+    tripId: string;
+    day: number;
+    title: string;
+    description: string;
+    location: string;
+    category: ItineraryCategory;
+    timeSlot: TimeSlot;
+}
+
+export interface Message {
+    id: string;
+    tripId: string;
+    senderId: string | null;
+    content: string;
+    isAi: boolean;
+    timestamp: string;
+}
+
+export interface SettlementTransaction {
+    payerId: string;
+    payeeId: string;
+    amountCents: number;
+}
+
