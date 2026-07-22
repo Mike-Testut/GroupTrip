@@ -1,6 +1,16 @@
-@import "tailwindcss/preflight";
-@tailwind utilities;
+@import "tailwindcss";
 
+@source "./src/**/*.{ts,tsx}";
+@source "./index.html";
+
+@theme {
+  --color-coral: #D85A30;
+  --color-coral-dark: #993C1D;
+  --color-coral-light: #FAECE7;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
 /* ─── Brand tokens ─────────────────────────────────────────── */
 :root {
   --coral:       #D85A30;
