@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/GroupTrip.iml" filepath="$PROJECT_DIR$/.idea/GroupTrip.iml" />
-      <module fileurl="file://$PROJECT_DIR$/server/.idea/server.iml" filepath="$PROJECT_DIR$/server/.idea/server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api/.idea/api.iml" filepath="$PROJECT_DIR$/api/.idea/api.iml" />
     </modules>
   </component>
 </project>
