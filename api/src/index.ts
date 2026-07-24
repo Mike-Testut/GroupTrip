@@ -1,15 +1,25 @@
-import express from "express";
+import 'dotenv/config'
+import app from './app'
+import { prisma } from './lib/prisma'
 
-const app = express()
 const PORT = process.env.PORT || 4000;
 
-app.use(express.json())
 
 app.get("/", (req, res) => {
     res.json({message: "API Running!"})
 })
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`)
 })
+
+
+const shutdown = async () => {
+    console.log('Shutting down...')
+    await prisma.$disconnect()
+    server.close(() => process.exit(0))
+}
+
+process.on('SIGTERM', shutdown)
+process.on('SIGINT', shutdown)
 
